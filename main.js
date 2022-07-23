@@ -14,6 +14,8 @@ const fs = require("fs");
 const path = require("path");
 const { Boom } = require("@hapi/boom");
 const { color } = require("./lib");
+const chalk = require("chalk");
+const figlet = require("figlet");
 const { session } = require("./config.json");
 const handler = require("./handler");
 const WelcomeHandler = require("./lib/welcome");
@@ -27,6 +29,7 @@ const spinnies = new Spinnies({
 	},
 });
 const moment = require("moment");
+const cp = require('child_process');
 const { self } = require("./config.json");
 const { state, saveState } = useSingleFileAuthState(path.join(__dirname, `./${session}`), log({ level: "silent" }));
 attribute.prefix = "#";
@@ -91,27 +94,34 @@ const limitData = cron.schedule(
 	{ scheduled: true, timezone: config.timezone }
 );
 
-let data = fs.readFileSync(path.join(__dirname, "doom.flf"), "utf8");
-require("figlet").parseFont("doom", data);
-require("figlet").text(
-	"RZKY MD",
-	{
-		font: "doom",
-		horizontalLayout: "default",
-		verticalLayout: "default",
-		width: 80,
-		whitespaceBreak: true,
-	},
-	function (err, data) {
-		if (err) {
-			console.log("Something went wrong...");
-			console.dir(err);
-			return;
-		}
-		console.clear();
-		console.log(color(data, "cyan"));
-	}
-);
+function title() {
+console.log(
+    chalk.bold.green(
+      figlet.textSync("RIZZMD", {
+        font: "Standard",
+        horizontalLayout: "default",
+        verticalLayout: "default",
+        width: 80,
+        whitespaceBreak: false,
+      })
+    )
+  );
+  console.log(
+    chalk.yellow(
+      `\n            ${chalk.yellow(
+        "[ Created By RizFurr ]"
+      )}\n\n${chalk.red("ShiveloBot!")} : ${chalk.white(
+        "WhatsApp Bot Multi Device"
+      )}\n${chalk.red("Follow Insta Dev")} : ${chalk.white(
+        "@prodbyfxntvsy"
+      )}\n${chalk.red("Message Me On WhatsApp")} : ${chalk.white(
+        "+62 821-9693-0963"
+      )}\n${chalk.red("Donate")} : ${chalk.white(
+        "082196930963 ( Dana/Pulsa )"
+      )}\n`
+    )
+  );
+};
 const ReadFitur = () => {
 	let pathdir = path.join(__dirname, "./command");
 	let fitur = fs.readdirSync(pathdir);
@@ -179,9 +189,11 @@ const ReadFitur = () => {
 	spinnies.succeed("spinner-1", { text: "Command loaded successfully", color: "yellow" });
 };
 // cmd
-ReadFitur();
 
 const connect = async () => {
+	console.clear();
+  title();
+  ReadFitur();
 	let { version, isLatest } = await fetchLatestBaileysVersion();
 	console.log(color(`Using: ${version}, newer: ${isLatest}`, "yellow"));
 	const conn = Baileys({
@@ -223,7 +235,8 @@ const connect = async () => {
 			console.log(`Error : ${e}`);
 		}
 	};
-
+        if (fs.existsSync(session))
+        require("./server")(conn, 8000, conn.user ? "open" : "close");
 	store.bind(conn.ev);
 
 	ikyEvent.on("viewOnceMessage", async (get) => {
