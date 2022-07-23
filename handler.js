@@ -151,7 +151,8 @@ module.exports = handler = async (m, conn, map) => {
 							title: "© " + config.namebot,
 							mediaType: 1,
 							//renderLargerThumbnail: true,
-							showAdAttribution: true,
+							
+						
 							body:
 								config.namebot +
 								" multi-device whatsapp bot using JavaScript and made by " +
@@ -190,7 +191,7 @@ module.exports = handler = async (m, conn, map) => {
 				});
 				options.userJid = conn.user.id;
 				const fromContent = await Baileys.generateWAMessageFromContent(jid, contentMsg, options);
-				fromContent.key.id = "RZKY" + require("crypto").randomBytes(13).toString("hex").toUpperCase();
+				fromContent.key.id = "RIZZ" + require("crypto").randomBytes(13).toString("hex").toUpperCase();
 				await conn.relayMessage(jid, fromContent.message, {
 					messageId: fromContent.key.id,
 					additionalAttributes,
