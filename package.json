@@ -1,10 +1,10 @@
 {
-  "name": "rzky-multidevice",
+  "name": "rizz-multidevice",
   "version": "4.0.0",
   "main": "index.js",
   "depecrated": false,
   "license": "MIT",
-  "author": "RizkyFadilah",
+  "author": "RizFurr",
   "scripts": {
     "start": "node .",
     "format": "prettier --write '**/*.{md,js,json}'"
