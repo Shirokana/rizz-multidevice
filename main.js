@@ -192,8 +192,9 @@ const ReadFitur = () => {
 
 const connect = async () => {
 	console.clear();
-  title();
-  ReadFitur();
+	title();  
+	ReadFitur();
+	_quickTest();
 	let { version, isLatest } = await fetchLatestBaileysVersion();
 	console.log(color(`Using: ${version}, newer: ${isLatest}`, "yellow"));
 	const conn = Baileys({
@@ -299,21 +300,26 @@ const connect = async () => {
 
 	//anticall
 	conn.ws.on("CB:call", async (json) => {
-		if (json.content[0].tag == "offer") {
-			conn.sendMessage(json.content[0].attrs["call-creator"], {
-				text: `Terdeteksi Menelpon BOT!\nSilahkan Hubungi Owner Untuk Membuka Block !\n\nNomor Owner: \n${config.owner
-					.map(
-						(a) =>
-							`*wa.me/${a.split(`@`)[0]}* | ${
-								conn.getName(a).includes("+62") ? "No Detect" : conn.getName(a)
-							}`
-					)
-					.join("\n")}`,
-			});
-			await require("delay")(8000);
-			await conn.updateBlockStatus(json.content[0].attrs["call-creator"], "block");
-		}
-	});
+    if (json.content[0].tag == "offer") {
+      await conn.sendMessage(json.content[0].attrs["call-creator"], {
+        text: `Terdeteksi Menelpon BOT!\nSilahkan Hubungi Owner Untuk Membuka Block!`,
+        footer: `© ${conn.user.name} • ${new Date().getFullYear()}`,
+        templateButtons: [
+          {
+            urlButton: {
+              displayText: "Contact Owner",
+              url: "mailto:rizowohq@gmail.com",
+            },
+          },
+        ],
+      });
+      require("delay")(8000);
+      await conn.updateBlockStatus(
+        json.content[0].attrs["call-creator"],
+        "block"
+      );
+    }
+  });
 
 	//contact update
 	conn.ev.on("contacts.update", (m) => {
@@ -352,26 +358,7 @@ const connect = async () => {
 		});
 	}
 
-	// detect Reaction message
-	conn.ev.on("messages.reaction", async (m) => {
-		if (m.reaction.key.id.startsWith("BAE5") && m.reaction.key.id.length === 16) return;
-		let mesg = await store.loadMessage(m.reaction.key.remoteJid, m.key.id, conn);
-		let frem = m.reaction.key.remoteJid.endsWith("@g.us") ? m.reaction.key.participant : m.reaction.key.remoteJid;
-		let frum = m.key.remoteJid.endsWith("@g.us") ? m.key.participant : m.key.remoteJid;
-		await conn.sendMessage(
-			m.reaction.key.remoteJid,
-			{
-				text: `*【﻿ ${m.operation == "add" ? "ADD" : "DELETE"} REACTION 】*\n\n*_Tagged:_* @${
-					(m.reaction.key.fromMe ? decodeJid(conn.user.id) : decodeJid(frem)).split("@")[0]
-				}\n*_To:_* ${frum ? `@${frum.split("@")[0]}` : `-`}\n*_Emoji:_* ${
-					m.operation == "add" ? m.reaction.text : "-"
-				}`,
-				withTag: true,
-			},
-			{ quoted: mesg }
-		);
-	});
-
+	
 	// detect group update
 	conn.ev.on("groups.update", async (json) => {
 		const res = json[0];
@@ -444,13 +431,59 @@ const connect = async () => {
 		if (msg && type == "protocolMessage") conn.ev.emit("message.delete", msg.message.protocolMessage.key);
 		handler(m, conn, attribute);
 	});
-};
-connect();
+}
 
-if (config.server)
-	require("http")
-		.createServer((__, res) => res.end("Server Running!"))
-		.listen(8080);
+
+connect().catch(() => {});
+
+async function _quickTest() {
+  let test = await Promise.all(
+    [
+      cp.spawn("ffmpeg"),
+      cp.spawn("ffprobe"),
+      cp.spawn("ffmpeg", [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-filter_complex",
+        "color",
+        "-frames:v",
+        "1",
+        "-f",
+        "webp",
+        "-",
+      ]),
+      cp.spawn("convert"),
+      cp.spawn("magick"),
+      cp.spawn("gm"),
+    ].map((p) => {
+      return Promise.race([
+        new Promise((resolve) => {
+          p.on("close", (code) => {
+            resolve(code !== 127);
+          });
+        }),
+        new Promise((resolve) => {
+          p.on("error", (_) => resolve(false));
+        }),
+      ]);
+    })
+  );
+  let [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm] = test;
+  let s = (global.support = {
+    ffmpeg,
+    ffprobe,
+    ffmpegWebp,
+    convert,
+    magick,
+    gm,
+  });
+  console.log(global.support);
+  require("./lib/convert").support = s;
+  Object.freeze(global.support);
+}
+
+
 
 process.on("uncaughtException", function (err) {
 	console.error(err);
