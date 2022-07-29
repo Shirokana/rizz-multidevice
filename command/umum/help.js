@@ -101,16 +101,14 @@ ${
 			await conn.sendMessage(
 				msg.from,
 				{
-					video: { url: config.thumbvideo },
+					image: { url: config.thumbimage },
 					caption: str,
-					gifPlayback: true,
-					footer: config.namebot + " • " + config.ownername,
+					footer: `${conn.user.name} © ${new Date().getFullYear()}`,
 					templateButtons: [
-						{ urlButton: { displayText: "Shortlink", url: "https://sl.rzkyfdlh.tech" } },
-						{ urlButton: { displayText: "Downloader", url: "https://down.rzkyfdlh.tech" } },
-						{ quickReplyButton: { displayText: "Script Bot📑", id: "#script" } },
-						{ quickReplyButton: { displayText: "Changelog📋", id: "#changelog" } },
-						{ quickReplyButton: { displayText: "Dashboard📊", id: "#db" } },
+						{ urlButton: { displayText: "🌐 Website", url: "https://rizfurr.ml" } },
+						{ quickReplyButton: { displayText: "📑 Script Bot", id: "#script" } },
+						{ quickReplyButton: { displayText: "👥 Owner Bot", id: "#owner" } },
+						{ quickReplyButton: { displayText: "📊 Dashboard", id: "#db" } },
 					],
 				},
 				{ quoted: msg }

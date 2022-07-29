@@ -30,9 +30,9 @@ module.exports = {
 			const check = await queryInvite(code);
 
 			//
-			if (check.size >= 257) return await msg.reply("Group Full");
-			if (check.size < 80)
-				return await msg.reply("The minimum requirement for group members must be more than 80 people.");
+			if (check.size >= 500) return await msg.reply("Group Full");
+			if (check.size < 10)
+				return await msg.reply("The minimum requirement for group members must be more than 10 people.");
 		} catch {
 			return msg.reply("Invalid invite url.");
 		}

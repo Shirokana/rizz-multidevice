@@ -148,17 +148,15 @@ module.exports = handler = async (m, conn, map) => {
 			options.adReply
 				? (content.contextInfo = {
 						externalAdReply: {
-							title: "© " + config.namebot,
-							mediaType: 1,
-							//renderLargerThumbnail: true,
-							
-						
+							title: "©" + config.namebot,
+							mediaType: 2,
+							mediaType: "PHOTO",
 							body:
 								config.namebot +
-								" multi-device whatsapp bot using JavaScript and made by " +
+								" Multi-Device Whatsapp Bot Using JavaScript And Made By " +
 								config.ownername,
 							thumbnail: await conn.getBuffer(config.thumb),
-							sourceUrl: "https://github.com/Rizky878/rzky-multidevice/",
+							sourceUrl: "https://github.com/rizzydev81/rizz-multidevice/",
 						},
 				  })
 				: "";
@@ -278,7 +276,7 @@ module.exports = handler = async (m, conn, map) => {
 			}
 		}
 
-		if (
+	/*	if (
 			!isCmd &&
 			isUrl(msg.body) &&
 			/tiktok.com|soundcloud.com|imgur.com|pin.it|pinterest.com|youtube.com|youtu.be/i.test(msg.body)
@@ -333,7 +331,7 @@ module.exports = handler = async (m, conn, map) => {
 			} catch (e) {
 				console.log(e);
 			}
-		}
+		}*/
 
 		if (!cmd) return;
 		if (!cooldown.has(from)) {
