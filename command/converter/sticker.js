@@ -48,34 +48,46 @@ module.exports = {
 			} else if ((isMedia && !msg.message.videoMessage) || isQImg) {
 				buffer = isQImg ? await quoted.download() : await msg.download();
 				stickerBuff = await sticker(buffer, { isImage: true, withPackInfo: true, packInfo, cmdType: "1" });
-				await conn.sendMessage(from, { sticker: stickerBuff, contextInfo: {
-          externalAdReply: {
-         title: "©" + config.namebot,
-         body: "Multi-Device Whatsapp Bot Using JavaScript And Made By " + config.ownername,
-         mediaType: 2,
-         mediaType: "PHOTO",
-         thumbnail: await conn.getBuffer(config.thumb),
-         sourceUrl: 'https://github.com/rizzydev18/rizz-multidevice'
-        }
-   }
-}, { quoted: msg })
+				await conn.sendMessage(
+					from,
+					{
+						sticker: stickerBuff,
+						contextInfo: {
+							externalAdReply: {
+								title: "©" + config.namebot,
+								body: "Multi-Device Whatsapp Bot Using JavaScript And Made By " + config.ownername,
+								mediaType: 2,
+								mediaType: "PHOTO",
+								thumbnail: await conn.getBuffer(config.thumb),
+								sourceUrl: "https://github.com/rizzydev18/rizz-multidevice",
+							},
+						},
+					},
+					{ quoted: msg }
+				);
 			} else if (
 				(isMedia && msg.message.videoMessage.fileLength < 2 << 20) ||
 				(isQVid && quoted.message.videoMessage.fileLength < 2 << 20)
 			) {
 				buffer = isQVid ? await quoted.download() : await msg.download();
 				stickerBuff = await sticker(buffer, { isVideo: true, withPackInfo: true, packInfo, cmdType: "1" });
-				await conn.sendMessage(from, { sticker: stickerBuff, contextInfo: {
-          externalAdReply: {
-         title: "©" + config.namebot,
-         body: "Multi-Device Whatsapp Bot Using JavaScript And Made By " + config.ownername,
-         mediaType: 2,
-         mediaType: "PHOTO",
-         thumbnail: await conn.getBuffer(config.thumb),
-         sourceUrl: 'https://github.com/rizzydev18/rizz-multidevice'
-        }
-   }
-}, { quoted: msg })
+				await conn.sendMessage(
+					from,
+					{
+						sticker: stickerBuff,
+						contextInfo: {
+							externalAdReply: {
+								title: "©" + config.namebot,
+								body: "Multi-Device Whatsapp Bot Using JavaScript And Made By " + config.ownername,
+								mediaType: 2,
+								mediaType: "PHOTO",
+								thumbnail: await conn.getBuffer(config.thumb),
+								sourceUrl: "https://github.com/rizzydev18/rizz-multidevice",
+							},
+						},
+					},
+					{ quoted: msg }
+				);
 			} else if (
 				isQDoc &&
 				(/image/.test(quoted.message.documentMessage.mimetype) ||
@@ -90,17 +102,23 @@ module.exports = {
 				if (!ext) return await msg.reply("Document mimetype unknown");
 				buffer = await quoted.download();
 				stickerBuff = await sticker(buffer, { ...ext, withPackInfo: true, packInfo, cmdType: "1" });
-				await conn.sendMessage(from, { sticker: stickerBuff, contextInfo: {
-          externalAdReply: {
-         title: "©" + config.namebot,
-         body: "Multi-Device Whatsapp Bot Using JavaScript And Made By " + config.ownername,
-         mediaType: 2,
-         mediaType: "PHOTO",
-         thumbnail: await conn.getBuffer('https://telegra.ph/file/b3c470ca925aa11de2815.jpg'),
-         sourceUrl: 'https://rizfurr.ml'
-        }
-   }
-}, { quoted: msg })
+				await conn.sendMessage(
+					from,
+					{
+						sticker: stickerBuff,
+						contextInfo: {
+							externalAdReply: {
+								title: "©" + config.namebot,
+								body: "Multi-Device Whatsapp Bot Using JavaScript And Made By " + config.ownername,
+								mediaType: 2,
+								mediaType: "PHOTO",
+								thumbnail: await conn.getBuffer("https://telegra.ph/file/b3c470ca925aa11de2815.jpg"),
+								sourceUrl: "https://rizfurr.ml",
+							},
+						},
+					},
+					{ quoted: msg }
+				);
 			} else {
 				await msg.reply(`reply sticker`);
 			}

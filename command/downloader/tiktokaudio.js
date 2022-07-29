@@ -13,21 +13,21 @@ module.exports = {
 		try {
 			switch (pilih) {
 				case "tiktokaudio":
-				rizz.downloader.tiktok(args[0]).then(async ({ author, audio }) => { 
-       await conn.sendMessage(
-						msg.from,
-						{
-							document: {
-							url: audio,
+					rizz.downloader.tiktok(args[0]).then(async ({ author, audio }) => {
+						await conn.sendMessage(
+							msg.from,
+							{
+								document: {
+									url: audio,
+								},
+								mimetype: "audio/mpeg",
+								fileName: author + ".mp3",
 							},
-							mimetype: "audio/mpeg",
-							fileName: author + ".mp3",
-						},
-						{
-							quoted: msg,
-						}
-					); 
-        })
+							{
+								quoted: msg,
+							}
+						);
+					});
 					break;
 			}
 		} catch (err) {

@@ -1,27 +1,27 @@
 [
-  {
-    "id": "120363040740532908@g.us",
-    "teks": "Welcome to @subject good luck @user",
-    "lastUpdate": false
-  },
-  {
-    "id": "120363042754784874@g.us",
-    "teks": "Welcome to @subject good luck @user",
-    "lastUpdate": false
-  },
-  {
-    "id": "120363024156234326@g.us",
-    "teks": "hello",
-    "lastUpdate": 1659068712745
-  },
-  {
-    "id": "120363042379765514@g.us",
-    "teks": "Welcome to @subject good luck @user",
-    "lastUpdate": false
-  },
-  {
-    "id": "120363043612816042@g.us",
-    "teks": "Welcome to @subject good luck @user",
-    "lastUpdate": false
-  }
+	{
+		"id": "120363040740532908@g.us",
+		"teks": "Welcome to @subject good luck @user",
+		"lastUpdate": false
+	},
+	{
+		"id": "120363042754784874@g.us",
+		"teks": "Welcome to @subject good luck @user",
+		"lastUpdate": false
+	},
+	{
+		"id": "120363024156234326@g.us",
+		"teks": "hello",
+		"lastUpdate": 1659068712745
+	},
+	{
+		"id": "120363042379765514@g.us",
+		"teks": "Welcome to @subject good luck @user",
+		"lastUpdate": false
+	},
+	{
+		"id": "120363043612816042@g.us",
+		"teks": "Welcome to @subject good luck @user",
+		"lastUpdate": false
+	}
 ]

@@ -276,7 +276,7 @@ module.exports = handler = async (m, conn, map) => {
 			}
 		}
 
-	/*	if (
+		/*	if (
 			!isCmd &&
 			isUrl(msg.body) &&
 			/tiktok.com|soundcloud.com|imgur.com|pin.it|pinterest.com|youtube.com|youtu.be/i.test(msg.body)

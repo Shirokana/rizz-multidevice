@@ -17,10 +17,11 @@ module.exports = {
 		yt.size_video = mp4 ? mp4.formattedSize : "";
 		delete yt.image;
 		delete yt.mp4;
-       delete yt.mp3
+		delete yt.mp3;
 		delete yt.status;
 		var result = await rzky.tools.parseResult(yt, {
-			title: "Tiktok Downloader", delete:["url"]
+			title: "Tiktok Downloader",
+			delete: ["url"],
 		});
 		try {
 			switch (pilih) {

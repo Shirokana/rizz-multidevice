@@ -13,33 +13,33 @@ module.exports = {
 		try {
 			switch (pilih) {
 				case "spotify":
-				  spotify(args[0]).then(async ({ name, artist, cover, album, url }) => {
-let rizz = require("rizfurr-api");
-var teks = `*Spotify Downloader*\n\n*≻ Title :* ${name}\n*≻ Artist :* ${artist}\n*≻ In Album :* ${album}\n\n_wait a minute sending media..._`;
-					await conn.sendMessage(
-              msg.from,
-              {
-                image: {
-                  url: cover,
-                },
-                caption: teks,
-              },
-              {
-                quoted: msg,
-              }
-            );  
-await conn.sendMessage(
-              msg.from,
-              {
-                document: url,
-                fileName: artist+' - '+name+'.mp3',
-                mimetype: "audio/mpeg",
-              },
-              {
-                quoted: msg,
-              }
-            );
-          })
+					spotify(args[0]).then(async ({ name, artist, cover, album, url }) => {
+						let rizz = require("rizfurr-api");
+						var teks = `*Spotify Downloader*\n\n*≻ Title :* ${name}\n*≻ Artist :* ${artist}\n*≻ In Album :* ${album}\n\n_wait a minute sending media..._`;
+						await conn.sendMessage(
+							msg.from,
+							{
+								image: {
+									url: cover,
+								},
+								caption: teks,
+							},
+							{
+								quoted: msg,
+							}
+						);
+						await conn.sendMessage(
+							msg.from,
+							{
+								document: url,
+								fileName: artist + " - " + name + ".mp3",
+								mimetype: "audio/mpeg",
+							},
+							{
+								quoted: msg,
+							}
+						);
+					});
 					break;
 			}
 		} catch (err) {

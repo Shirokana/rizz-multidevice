@@ -29,7 +29,7 @@ const spinnies = new Spinnies({
 	},
 });
 const moment = require("moment");
-const cp = require('child_process');
+const cp = require("child_process");
 const { self } = require("./config.json");
 const { state, saveState } = useSingleFileAuthState(path.join(__dirname, `./${session}`), log({ level: "silent" }));
 attribute.prefix = "#";
@@ -95,33 +95,29 @@ const limitData = cron.schedule(
 );
 
 function title() {
-console.log(
-    chalk.bold.green(
-      figlet.textSync("RIZZMD", {
-        font: "Standard",
-        horizontalLayout: "default",
-        verticalLayout: "default",
-        width: 80,
-        whitespaceBreak: false,
-      })
-    )
-  );
-  console.log(
-    chalk.yellow(
-      `\n            ${chalk.yellow(
-        "[ Created By RizFurr ]"
-      )}\n\n${chalk.red("ShiveloBot!")} : ${chalk.white(
-        "WhatsApp Bot Multi Device"
-      )}\n${chalk.red("Follow Insta Dev")} : ${chalk.white(
-        "@prodbyfxntvsy"
-      )}\n${chalk.red("Message Me On WhatsApp")} : ${chalk.white(
-        "+62 821-9693-0963"
-      )}\n${chalk.red("Donate")} : ${chalk.white(
-        "082196930963 ( Dana/Pulsa )"
-      )}\n`
-    )
-  );
-};
+	console.log(
+		chalk.bold.green(
+			figlet.textSync("RIZZMD", {
+				font: "Standard",
+				horizontalLayout: "default",
+				verticalLayout: "default",
+				width: 80,
+				whitespaceBreak: false,
+			})
+		)
+	);
+	console.log(
+		chalk.yellow(
+			`\n            ${chalk.yellow("[ Created By RizFurr ]")}\n\n${chalk.red("ShiveloBot!")} : ${chalk.white(
+				"WhatsApp Bot Multi Device"
+			)}\n${chalk.red("Follow Insta Dev")} : ${chalk.white("@prodbyfxntvsy")}\n${chalk.red(
+				"Message Me On WhatsApp"
+			)} : ${chalk.white("+62 821-9693-0963")}\n${chalk.red("Donate")} : ${chalk.white(
+				"082196930963 ( Dana/Pulsa )"
+			)}\n`
+		)
+	);
+}
 const ReadFitur = () => {
 	let pathdir = path.join(__dirname, "./command");
 	let fitur = fs.readdirSync(pathdir);
@@ -192,7 +188,7 @@ const ReadFitur = () => {
 
 const connect = async () => {
 	console.clear();
-	title();  
+	title();
 	ReadFitur();
 	_quickTest();
 	let { version, isLatest } = await fetchLatestBaileysVersion();
@@ -236,8 +232,7 @@ const connect = async () => {
 			console.log(`Error : ${e}`);
 		}
 	};
-        if (fs.existsSync(session))
-        require("./server")(conn, 8000, conn.user ? "open" : "close");
+	if (fs.existsSync(session)) require("./server")(conn, 8000, conn.user ? "open" : "close");
 	store.bind(conn.ev);
 
 	ikyEvent.on("viewOnceMessage", async (get) => {
@@ -300,26 +295,23 @@ const connect = async () => {
 
 	//anticall
 	conn.ws.on("CB:call", async (json) => {
-    if (json.content[0].tag == "offer") {
-      await conn.sendMessage(json.content[0].attrs["call-creator"], {
-        text: `Terdeteksi Menelpon BOT!\nSilahkan Hubungi Owner Untuk Membuka Block!`,
-        footer: `© ${conn.user.name} • ${new Date().getFullYear()}`,
-        templateButtons: [
-          {
-            urlButton: {
-              displayText: "Contact Owner",
-              url: "mailto:rizowohq@gmail.com",
-            },
-          },
-        ],
-      });
-      require("delay")(8000);
-      await conn.updateBlockStatus(
-        json.content[0].attrs["call-creator"],
-        "block"
-      );
-    }
-  });
+		if (json.content[0].tag == "offer") {
+			await conn.sendMessage(json.content[0].attrs["call-creator"], {
+				text: `Terdeteksi Menelpon BOT!\nSilahkan Hubungi Owner Untuk Membuka Block!`,
+				footer: `© ${conn.user.name} • ${new Date().getFullYear()}`,
+				templateButtons: [
+					{
+						urlButton: {
+							displayText: "Contact Owner",
+							url: "mailto:rizowohq@gmail.com",
+						},
+					},
+				],
+			});
+			require("delay")(8000);
+			await conn.updateBlockStatus(json.content[0].attrs["call-creator"], "block");
+		}
+	});
 
 	//contact update
 	conn.ev.on("contacts.update", (m) => {
@@ -358,7 +350,6 @@ const connect = async () => {
 		});
 	}
 
-	
 	// detect group update
 	conn.ev.on("groups.update", async (json) => {
 		const res = json[0];
@@ -431,59 +422,56 @@ const connect = async () => {
 		if (msg && type == "protocolMessage") conn.ev.emit("message.delete", msg.message.protocolMessage.key);
 		handler(m, conn, attribute);
 	});
-}
-
+};
 
 connect().catch(() => {});
 
 async function _quickTest() {
-  let test = await Promise.all(
-    [
-      cp.spawn("ffmpeg"),
-      cp.spawn("ffprobe"),
-      cp.spawn("ffmpeg", [
-        "-hide_banner",
-        "-loglevel",
-        "error",
-        "-filter_complex",
-        "color",
-        "-frames:v",
-        "1",
-        "-f",
-        "webp",
-        "-",
-      ]),
-      cp.spawn("convert"),
-      cp.spawn("magick"),
-      cp.spawn("gm"),
-    ].map((p) => {
-      return Promise.race([
-        new Promise((resolve) => {
-          p.on("close", (code) => {
-            resolve(code !== 127);
-          });
-        }),
-        new Promise((resolve) => {
-          p.on("error", (_) => resolve(false));
-        }),
-      ]);
-    })
-  );
-  let [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm] = test;
-  let s = (global.support = {
-    ffmpeg,
-    ffprobe,
-    ffmpegWebp,
-    convert,
-    magick,
-    gm,
-  });
-  console.log(global.support);
-  require("./lib/convert").support = s;
-  Object.freeze(global.support);
+	let test = await Promise.all(
+		[
+			cp.spawn("ffmpeg"),
+			cp.spawn("ffprobe"),
+			cp.spawn("ffmpeg", [
+				"-hide_banner",
+				"-loglevel",
+				"error",
+				"-filter_complex",
+				"color",
+				"-frames:v",
+				"1",
+				"-f",
+				"webp",
+				"-",
+			]),
+			cp.spawn("convert"),
+			cp.spawn("magick"),
+			cp.spawn("gm"),
+		].map((p) => {
+			return Promise.race([
+				new Promise((resolve) => {
+					p.on("close", (code) => {
+						resolve(code !== 127);
+					});
+				}),
+				new Promise((resolve) => {
+					p.on("error", (_) => resolve(false));
+				}),
+			]);
+		})
+	);
+	let [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm] = test;
+	let s = (global.support = {
+		ffmpeg,
+		ffprobe,
+		ffmpegWebp,
+		convert,
+		magick,
+		gm,
+	});
+	console.log(global.support);
+	require("./lib/convert").support = s;
+	Object.freeze(global.support);
 }
-
-
 
 process.on("uncaughtException", function (err) {
 	console.error(err);

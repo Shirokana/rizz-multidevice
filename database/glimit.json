@@ -1,1 +1,20 @@
-[{"id":"6283112525492@s.whatsapp.net","glimit":1},{"id":"6289636273181@s.whatsapp.net","glimit":1},{"id":"6289652955552@s.whatsapp.net","glimit":2},{"id":"6289635990161@s.whatsapp.net","glimit":1},{"id":"6285791730657@s.whatsapp.net","glimit":6},{"id":"6285769058372@s.whatsapp.net","glimit":1},{"id":"6282150313587@s.whatsapp.net","glimit":5},{"id":"6282114760717@s.whatsapp.net","glimit":10},{"id":"6289683250101@s.whatsapp.net","glimit":10},{"id":"6281276469436@s.whatsapp.net","glimit":3},{"id":"6287818554530@s.whatsapp.net","glimit":7},{"id":"6289531456584@s.whatsapp.net","glimit":6},{"id":"6282113128825@s.whatsapp.net","glimit":5},{"id":"6281543353869@s.whatsapp.net","glimit":1},{"id":"62895605063090@s.whatsapp.net","glimit":2},{"id":"6281276886866@s.whatsapp.net","glimit":1},{"id":"6283815462511@s.whatsapp.net","glimit":2},{"id":"6285294222331@s.whatsapp.net","glimit":2}]
+[
+	{ "id": "6283112525492@s.whatsapp.net", "glimit": 1 },
+	{ "id": "6289636273181@s.whatsapp.net", "glimit": 1 },
+	{ "id": "6289652955552@s.whatsapp.net", "glimit": 2 },
+	{ "id": "6289635990161@s.whatsapp.net", "glimit": 1 },
+	{ "id": "6285791730657@s.whatsapp.net", "glimit": 6 },
+	{ "id": "6285769058372@s.whatsapp.net", "glimit": 1 },
+	{ "id": "6282150313587@s.whatsapp.net", "glimit": 5 },
+	{ "id": "6282114760717@s.whatsapp.net", "glimit": 10 },
+	{ "id": "6289683250101@s.whatsapp.net", "glimit": 10 },
+	{ "id": "6281276469436@s.whatsapp.net", "glimit": 3 },
+	{ "id": "6287818554530@s.whatsapp.net", "glimit": 7 },
+	{ "id": "6289531456584@s.whatsapp.net", "glimit": 6 },
+	{ "id": "6282113128825@s.whatsapp.net", "glimit": 5 },
+	{ "id": "6281543353869@s.whatsapp.net", "glimit": 1 },
+	{ "id": "62895605063090@s.whatsapp.net", "glimit": 2 },
+	{ "id": "6281276886866@s.whatsapp.net", "glimit": 1 },
+	{ "id": "6283815462511@s.whatsapp.net", "glimit": 2 },
+	{ "id": "6285294222331@s.whatsapp.net", "glimit": 2 }
+]
